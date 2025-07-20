@@ -5,6 +5,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { DigitalResource } from '../models/digital-resource';
 
 @Component({
   selector: 'app-digital-resource-form',
@@ -13,8 +14,10 @@ import {
   templateUrl: './digital-resource-form.html',
   styleUrls: ['./digital-resource-form.css'],
 })
+
 export class DigitalResourceForm {
-  resourceForm: FormGroup;
+  resourceForm: FormGroup; //The reactive form instance
+  resources: DigitalResource[] = []; // Displayed data list
 
   constructor() {
     this.resourceForm = new FormGroup({
@@ -26,5 +29,23 @@ export class DigitalResourceForm {
       ]),
       type: new FormControl('', Validators.required),
     });
+    this.loadResources();
   }
+
+  loadResources() {
+    const saved = localStorage.getItem('digitalResources');
+    if (saved) {
+      this.resources = JSON.parse(saved);
+    }
+  }
+
+  onSubmit() {
+    if (this.resourceForm.valid) {
+      this.resources.push(this.resourceForm.value);
+      localStorage.setItem('digitalResources', JSON.stringify(this.resources));
+      this.resourceForm.reset();
+    }
+  }
+
+  
 }

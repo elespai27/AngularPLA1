@@ -2,3 +2,16 @@
 body {
   font-family: "helvetica-lt-pro", sans-serif; 
 }
+
+.form-container {
+  display: flex;
+  align-items: center;              /* Centra los elementos hijos horizontalmente */
+  width: 1000px;                    /* Ocupa todo el viewport horizontal */
+  min-width: 100%;                  /* Garantiza el 100% en dispositivos móviles */
+  margin: 10px auto;                /* Quita márgenes externos */
+  padding: 20px 0;                  /* Padding superior/inferior, si quieres */
+  background: #2c1ddb;            /* Color lila existente */
+  position: relative;               /* Asegura posicionamiento estándar */
+
+}
+

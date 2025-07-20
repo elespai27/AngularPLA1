@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { DigitalResourceForm } from '../../digital-resource-form/digital-resource-form';  
+
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  standalone: true,
+  imports: [DigitalResourceForm],
   templateUrl: './home.html',
-  styleUrl: './home.css'
+  styleUrls: ['./home.css']
 })
 export class Home {
 
