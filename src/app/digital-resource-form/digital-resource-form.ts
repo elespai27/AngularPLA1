@@ -19,6 +19,8 @@ export class DigitalResourceForm {
   resourceForm: FormGroup; //The reactive form instance
   resources: DigitalResource[] = []; // Displayed data list
 
+  index: number | null = null;
+
   constructor() {
     this.resourceForm = new FormGroup({
       title: new FormControl('', Validators.required),
@@ -32,7 +34,6 @@ export class DigitalResourceForm {
     this.loadResources();
   }
 
-
   loadResources() {
     const saved = localStorage.getItem('digitalResources');
     if (saved) {
@@ -43,9 +44,42 @@ export class DigitalResourceForm {
   onSubmit() {
     if (this.resourceForm.valid) {
       this.resources.push(this.resourceForm.value);
-      localStorage.setItem('digitalResources', JSON.stringify(this.resources));
+      this.updateLocalStorage();
       this.resourceForm.reset();
     }
   }
-}
 
+  submitEditResource() {
+    if (this.resourceForm.valid && this.index !== null && this.index >= 0) {
+      const updateResource: DigitalResource = this.resourceForm.value;
+      this.resources[this.index] = updateResource;
+      this.updateLocalStorage();
+      this.resourceForm.reset();
+      this.index = null;
+    }
+  }
+
+  deleteResource(index: number): void {
+    this.resources.splice(index, 1);
+    this.updateLocalStorage();
+    if (this.index === index) {
+      this.resourceForm.reset();
+      this.index = null;
+    }
+  }
+
+  editResource(index: number): void {
+    this.index = index;
+    const resourceEdit = this.resources[index];
+    this.resourceForm.setValue({
+      title: resourceEdit.title,
+      author: resourceEdit.author,
+      year: resourceEdit.year,
+      type: resourceEdit.type,
+    });
+  }
+
+  private updateLocalStorage() {
+    localStorage.setItem('digitalResources', JSON.stringify(this.resources));
+  }
+}

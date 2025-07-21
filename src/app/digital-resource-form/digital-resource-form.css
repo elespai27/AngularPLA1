@@ -11,6 +11,21 @@ form {
   color: rgb(0, 0, 0);
 }
 
+.edit-btn {
+  color:#7ad700;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.delete-btn {
+  color: #00ffff;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 /* .resource-item {
   background: #fff;
   border-radius: 8px;

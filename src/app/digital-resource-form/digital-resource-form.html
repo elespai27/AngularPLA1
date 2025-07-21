@@ -1,16 +1,25 @@
-<form [formGroup]="resourceForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="resourceForm" (ngSubmit)="index === null ? onSubmit() : submitEditResource()">
   <input formControlName="title" placeholder="Title" required />
   <input formControlName="author" placeholder="Author" required />
   <input formControlName="year" placeholder="Year" required />
   <input formControlName="type" placeholder="Type (book/video/etc)" required />
-  <button type="submit">Save it!</button>
+  <br />
+
+  <div class="button-container">
+    <!-- Cambia el texto dinámicamente -->
+    <button type="submit">
+      {{ index === null ? 'Save it!' : 'Update it!' }}
+    </button>
+  </div>
 </form>
+
 
 <ul class="resource-list">
   @for (resource of resources; track $index) {
     <li>
-    {{ $index }} - {{ resource.title }} by {{ resource.author }} ({{ resource.type }},
-    {{ resource.year }})
+      {{ $index }} - {{ resource.title }} by {{ resource.author }} {{ resource.type }}, {{ resource.year }}
+      <button class="edit-btn" type="button" (click)="editResource($index)">Edit</button>
+      <button class="delete-btn" type="button" (click)="deleteResource($index)">Delete</button>
     </li>
-}
+  }
 </ul>
