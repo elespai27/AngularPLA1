@@ -1,0 +1,38 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra los elementos hijos horizontalmente */
+  width: 100%;
+}
+
+.resource-list {
+  list-style: none;
+  margin-top: 24px;
+  color: rgb(0, 0, 0);
+}
+
+/* .resource-item {
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 8px rgba(44, 29, 219, 0.07);
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+}
+
+.resource-title {
+  font-weight: 700;
+  color: #2c1ddb;
+}
+
+.resource-author {
+  font-style: italic;
+  color: #555;
+}
+
+.resource-type,
+.resource-year {
+  color: #7161c1;
+} */
