@@ -10,7 +10,7 @@ This is a simple Angular project demonstrating a digital library where you can a
 - [x] Created model interface for digital resources (July 2025)
 - [x] Built reusable header component
 - [x] Integrated Adobe Fonts for typography
-- [ ] TODO: Implement edit/delete for resources
+- [x] TODO: Implement edit/delete for resources
 - [ ] TODO: Add authentication system
 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>
@@ -25,8 +25,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { DigitalResource } from '../models/digital-resource';
+
 📌 ¿Qué hace esto?
-Importa Angular core, los módulos para trabajar con formularios reactivos y un modelo llamado DigitalResource. Este modelo representa la estructura de un recurso digital (con campos como title, author, etc.).
+Importa Angular core, los módulos para trabajar con formularios reactivos y un modelo llamado DigitalResource. 
+Este modelo representa la estructura de un recurso digital (con campos como title, author, etc.).
 
 ts
 @Component({
@@ -36,15 +38,12 @@ ts
   templateUrl: './digital-resource-form.html',
   styleUrls: ['./digital-resource-form.css'],
 })
+
 📌 ¿Qué hace esto?
 Define un componente Angular standalone, que:
-
 Tiene como selector app-digital-resource-form
-
 Usa formularios reactivos
-
 Tiene una plantilla HTML (digital-resource-form.html)
-
 Usa estilos (digital-resource-form.css)
 
 🧩 Clase principal
@@ -53,11 +52,10 @@ export class DigitalResourceForm {
   resourceForm: FormGroup; // The reactive form instance
   resources: DigitalResource[] = []; // Lista de recursos digitales
   index: number | null = null; // Índice actual del recurso en edición (null si no se edita).
-📌 ¿Qué hace esto?
+  
+  📌 ¿Qué hace esto?
 resourceForm: el formulario que usás en la vista.
-
 resources: una lista en memoria de todos los recursos digitales creados o cargados.
-
 index: guarda el índice del recurso actualmente en edición. Si no se edita nada, es null.
 
 🔧 Constructor y configuración del formulario
@@ -76,11 +74,8 @@ constructor() {
 }
 📌 ¿Qué hace esto?
 Crea un formulario reactivo con campos válidos.
-
 Los campos title, author, type son obligatorios.
-
 year requiere un número de 4 cifras.
-
 Al iniciar el componente, llama a loadResources() para cargar recursos guardados en localStorage.
 
 📥 Cargar recursos desde localStorage
@@ -105,11 +100,8 @@ onSubmit() {
 }
 📌 ¿Qué hace esto?
 Si el formulario es válido:
-
 Agrega un nuevo recurso a la lista.
-
 Guarda la lista actualizada en localStorage.
-
 Limpia el formulario.
 
 ✏️ Editar un recurso ya existente
@@ -125,11 +117,8 @@ submitEditResource() {
 }
 📌 ¿Qué hace esto?
 Solo se ejecuta si el formulario es válido y hay un índice definido.
-
 Actualiza el recurso correspondiente en la lista.
-
 Guarda los datos actualizados en localStorage.
-
 Limpia el formulario y sale del modo de edición.
 
 🗑️ Eliminar un recurso
@@ -144,9 +133,7 @@ deleteResource(index: number): void {
 }
 📌 ¿Qué hace esto?
 Elimina el recurso indicado por índice.
-
 Actualiza el almacenamiento local.
-
 Si se estaba editando ese mismo recurso, también reinicia el formulario.
 
 🔄 Cargar recurso en modo edición
@@ -163,9 +150,7 @@ editResource(index: number): void {
 }
 📌 ¿Qué hace esto?
 Guarda el índice del recurso actual.
-
 Carga los valores del recurso en el formulario para que puedan ser editados.
-
 💾 Guardar en localStorage
 ts
 private updateLocalStorage() {
@@ -176,25 +161,12 @@ Guarda la lista actual de recursos en el localStorage del navegador en formato t
 
 📌 ¿Cómo funciona todo junto?
 El usuario crea recursos desde un formulario.
-
 Los recursos se guardan dentro de una lista y también en localStorage.
-
 Cada recurso tiene botones para:
-
 ✏️ Editar (carga el formulario con sus datos).
-
 🗑️ Eliminar (lo borra de la lista).
-
 El usuario puede actualizar un recurso editado y guardarlo.
-
 Todo es persistente gracias al uso de localStorage.
 
-¿Quieres descargar esto como archivo para llevártelo?
 
-📥 Aquí tienes el contenido listo para copiar, guardar y revisar:
 
-Archiva este texto como .txt o .md (Markdown)
-
-O pídemelo en PDF o DOCX si prefieres
-
-¿Te genero el archivo listo para descargar ahora mismo?

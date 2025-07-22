@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { DigitalResource } from '../models/digital-resource';
+import { ResourceService } from '../services/resourceService';
 
 @Component({
   selector: 'app-digital-resource-form',
@@ -14,14 +15,13 @@ import { DigitalResource } from '../models/digital-resource';
   templateUrl: './digital-resource-form.html',
   styleUrls: ['./digital-resource-form.css'],
 })
-
 export class DigitalResourceForm {
   resourceForm: FormGroup; //The reactive form instance
   resources: DigitalResource[] = []; // Displayed data list
 
   index: number | null = null;
 
-  constructor() {
+  constructor(private resourceService: ResourceService) {
     this.resourceForm = new FormGroup({
       title: new FormControl('', Validators.required),
       author: new FormControl('', Validators.required),
@@ -35,33 +35,26 @@ export class DigitalResourceForm {
   }
 
   loadResources() {
-    const saved = localStorage.getItem('digitalResources');
-    if (saved) {
-      this.resources = JSON.parse(saved);
-    }
+    this.resources = this.resourceService.getResources();
   }
 
   onSubmit() {
     if (this.resourceForm.valid) {
-      this.resources.push(this.resourceForm.value);
-      this.updateLocalStorage();
+      this.resources = this.resourceService.addResource(this.resourceForm.value);
       this.resourceForm.reset();
     }
   }
 
   submitEditResource() {
     if (this.resourceForm.valid && this.index !== null && this.index >= 0) {
-      const updateResource: DigitalResource = this.resourceForm.value;
-      this.resources[this.index] = updateResource;
-      this.updateLocalStorage();
+      this.resources = this.resourceService.updateResource(this.index, this.resourceForm.value);
       this.resourceForm.reset();
       this.index = null;
     }
   }
 
   deleteResource(index: number): void {
-    this.resources.splice(index, 1);
-    this.updateLocalStorage();
+    this.resources = this.resourceService.deleteResource(index);
     if (this.index === index) {
       this.resourceForm.reset();
       this.index = null;
@@ -77,9 +70,5 @@ export class DigitalResourceForm {
       year: resourceEdit.year,
       type: resourceEdit.type,
     });
-  }
-
-  private updateLocalStorage() {
-    localStorage.setItem('digitalResources', JSON.stringify(this.resources));
   }
 }
