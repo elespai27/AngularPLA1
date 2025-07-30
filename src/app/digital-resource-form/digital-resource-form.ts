@@ -7,17 +7,36 @@ import {
 } from '@angular/forms';
 import { DigitalResource } from '../models/digital-resource';
 import { ResourceService } from '../services/resourceService';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-digital-resource-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatTableModule,
+    MatIconModule,
+    MatSelectModule,
+    MatListModule,
+  ],
   templateUrl: './digital-resource-form.html',
   styleUrls: ['./digital-resource-form.css'],
 })
 export class DigitalResourceForm {
   resourceForm: FormGroup; //The reactive form instance
   resources: DigitalResource[] = []; // Displayed data list
+  displayedColumns = ['title', 'author', 'year', 'type', 'actions'];
 
   index: number | null = null;
 
@@ -33,22 +52,27 @@ export class DigitalResourceForm {
     });
     this.loadResources();
   }
-
   loadResources() {
     this.resources = this.resourceService.getResources();
+    console.log('Resources Load:', this.resources);
   }
 
   onSubmit() {
     if (this.resourceForm.valid) {
-      this.resources = this.resourceService.addResource(this.resourceForm.value);
-      this.resourceForm.reset();
+      this.resources = this.resourceService.addResource(
+        this.resourceForm.value
+      );
+     this.clearAndPristineForm();
     }
   }
 
   submitEditResource() {
     if (this.resourceForm.valid && this.index !== null && this.index >= 0) {
-      this.resources = this.resourceService.updateResource(this.index, this.resourceForm.value);
-      this.resourceForm.reset();
+      this.resources = this.resourceService.updateResource(
+        this.index,
+        this.resourceForm.value
+      );
+     this.clearAndPristineForm();
       this.index = null;
     }
   }
@@ -56,7 +80,7 @@ export class DigitalResourceForm {
   deleteResource(index: number): void {
     this.resources = this.resourceService.deleteResource(index);
     if (this.index === index) {
-      this.resourceForm.reset();
+      this.clearAndPristineForm();
       this.index = null;
     }
   }
@@ -69,6 +93,14 @@ export class DigitalResourceForm {
       author: resourceEdit.author,
       year: resourceEdit.year,
       type: resourceEdit.type,
+    });
+  }
+
+  clearAndPristineForm() {
+    this.resourceForm.reset();
+    Object.values(this.resourceForm.controls).forEach((control) => {
+      control.markAsPristine();
+      control.markAsUntouched();
     });
   }
 }

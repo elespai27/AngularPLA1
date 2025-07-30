@@ -3,9 +3,10 @@ import { DigitalResourceForm } from '../../digital-resource-form/digital-resourc
 
 @Component({
   selector: 'app-resources',
+  standalone: true,
   imports: [DigitalResourceForm],
   templateUrl: './resources.html',
-  styleUrl: './resources.css'
+  styleUrls: ['./resources.css']
 })
 export class Resources {
 

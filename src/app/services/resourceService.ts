@@ -6,10 +6,11 @@ import { DigitalResource } from '../models/digital-resource';
 })
 
 export class ResourceService {
-  private storageKey = 'digitakResources';
+  private storageKey = 'digitalResources';
 
   getResources(): DigitalResource[] {
     const saved = localStorage.getItem(this.storageKey);
+    // es igual que localStorage.getItem('digitalResources');
     return saved ? JSON.parse(saved) : [];
   }
 

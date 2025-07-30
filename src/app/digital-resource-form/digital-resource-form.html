@@ -1,25 +1,144 @@
-<form [formGroup]="resourceForm" (ngSubmit)="index === null ? onSubmit() : submitEditResource()">
-  <input formControlName="title" placeholder="Title" required />
-  <input formControlName="author" placeholder="Author" required />
-  <input formControlName="year" placeholder="Year" required />
-  <input formControlName="type" placeholder="Type (book/video/etc)" required />
-  <br />
+<form
+  [formGroup]="resourceForm"
+  (ngSubmit)="index === null ? onSubmit() : submitEditResource()"
+>
+  <!-- <input formControlName="title" placeholder="Title" required />
+   se cambia el input del formulario sencillo por el de mat-form-field de Angular-->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Título</mat-label>
+    <input matInput formControlName="title" placeholder="Título" required />
+    <mat-error *ngIf="resourceForm.get('title')?.hasError('required')">
+      The title is required.
+    </mat-error>
+  </mat-form-field>
 
-  <div class="button-container">
-    <!-- Cambia el texto dinámicamente -->
+  <!-- <input formControlName="author" placeholder="Author" required /> -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Autor</mat-label>
+    <input matInput formControlName="author" placeholder="Autor" required />
+    <mat-error *ngIf="resourceForm.get('author')?.hasError('required')">
+      The author is required.
+    </mat-error>
+  </mat-form-field>
+
+  <!-- <input formControlName="year" placeholder="Year" required /> -->
+     <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Año</mat-label>
+    <input matInput type="number" formControlName="year" placeholder="Año" required />
+    <mat-error *ngIf="resourceForm.get('year')?.hasError('required')">
+      The year is requiered.
+    </mat-error>
+    <mat-error *ngIf="resourceForm.get('year')?.hasError('pattern')">
+      Write a valid year (ej: 2024)
+    </mat-error>
+  </mat-form-field>
+
+  <!-- <input formControlName="type" placeholder="Type (book/video/etc)" required />
+  <br /> -->
+   <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Tipo</mat-label>
+    <mat-select formControlName="type" required>
+      <mat-option value="book">Libro</mat-option>
+      <mat-option value="video">Video</mat-option>
+      <mat-option value="audio">Audio</mat-option>
+      <!-- Agrega más opciones según sea necesario -->
+    </mat-select>
+    <mat-error *ngIf="resourceForm.get('type')?.hasError('required')">
+      The type is requiered.
+    </mat-error>
+  </mat-form-field>
+
+  <!-- <div class="button-container">
+    Cambia el texto dinámicamente
     <button type="submit">
+      {{ index === null ? "Save it!" : "Update it!" }}
+    </button>
+  </div>
+</form> -->
+<div class="button-container">
+    <button mat-raised-button color="primary" type="submit" [disabled]="resourceForm.invalid">
       {{ index === null ? 'Save it!' : 'Update it!' }}
+    </button>
+    <button *ngIf="index !== null" mat-button type="button" (click)="index=null; resourceForm.reset();">
+      Cancelar
     </button>
   </div>
 </form>
 
-
-<ul class="resource-list">
+<!-- <ul class="resource-list">
   @for (resource of resources; track $index) {
-    <li>
-      {{ $index }} - {{ resource.title }} by {{ resource.author }} {{ resource.type }}, {{ resource.year }}
-      <button class="edit-btn" type="button" (click)="editResource($index)">Edit</button>
-      <button class="delete-btn" type="button" (click)="deleteResource($index)">Delete</button>
-    </li>
+  <li>
+    {{ $index }} - {{ resource.title }} by {{ resource.author }}
+    {{ resource.type }}, {{ resource.year }}
+    <button class="edit-btn" type="button" (click)="editResource($index)">
+      Edit
+    </button>
+    <button class="delete-btn" type="button" (click)="deleteResource($index)">
+      Delete
+    </button>
+  </li>
   }
-</ul>
+</ul> -->
+
+<!-- LISTADO DE RECURSOS -->
+<!-- <mat-list>
+  <li mat-list-item *ngFor="let resource of resources; let i = index">
+    <div class="list-content">
+      <strong>{{ i }}</strong> - {{ resource.title }} by {{ resource.author }}, {{ resource.type }}, {{ resource.year }}
+    </div>
+    <button mat-icon-button color="primary" matTooltip="Edit" (click)="editResource(i)">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" matTooltip="Delete" (click)="deleteResource(i)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </li>
+</mat-list>
+
+cambiamos esta parte del código para probar con una tabla
+el loop viene interno en mat-table y con el atributo [dtaSource]="sources"-->
+
+
+<table mat-table [dataSource]="resources" class="mat-elevation-z8 full-width">
+
+  <!-- Title Column -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Title </th>
+    <td mat-cell *matCellDef="let resource"> {{ resource.title }} </td>
+  </ng-container>
+
+  <!-- Author Column -->
+  <ng-container matColumnDef="author">
+    <th mat-header-cell *matHeaderCellDef> Author </th>
+    <td mat-cell *matCellDef="let resource"> {{ resource.author }} </td>
+  </ng-container>
+
+  <!-- Year Column -->
+  <ng-container matColumnDef="year">
+    <th mat-header-cell *matHeaderCellDef> Year </th>
+    <td mat-cell *matCellDef="let resource"> {{ resource.year }} </td>
+  </ng-container>
+
+  <!-- Type Column -->
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> Type </th>
+    <td mat-cell *matCellDef="let resource"> {{ resource.type }} </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Button </th>
+    <td mat-cell *matCellDef="let resource; let i = index">
+      <button mat-icon-button color="primary" (click)="editResource(i)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteResource(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
