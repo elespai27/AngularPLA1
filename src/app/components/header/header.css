@@ -1,12 +1,12 @@
+/* // app-header.component.scss o global styles.scss */
+
 .app-header {
-  font-family: "rl-folklor", sans-serif;
-  font-weight: 10;
-  background-color: #7ad700;
-  color: #ccff00;
+  font-family: "p22-toybox-blocks", sans-serif;
+  letter-spacing: 0.2px;
+  color: #CFFF36;
   padding: 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-
 .container {
   display: flex;
   align-items: baseline;
@@ -15,30 +15,25 @@
   margin: 0 auto;
   padding: 5px;
 }
-
 .logo {
-  font-size: 50px;
-  font-weight: bold;
+  font-size: 3.5em;
   margin: 0;
-  letter-spacing: 2px;
+  letter-spacing: 5px;
+  line-height: 1.2;
 }
-
 .menu {
   float: right;
   margin-top: 2.5em;
 }
-
 .nav-link {
   margin-left: 24px;
   text-decoration: none;
   color: #CFFF36;
-  font-family: "rl-folklor", sans-serif;
+  font-family: "helvetica-lt-pro", sans-serif;
   font-size: 1.2em;
   font-weight: bold;
   transition: color 0.2s;
 }
-
 .nav-link:hover {
-  color: #00ffff; /* color al pasar el mouse */
+  color: #00ffff;
 }
-
