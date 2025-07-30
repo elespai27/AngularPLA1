@@ -1,7 +1,8 @@
 /* // app-header.component.scss o global styles.scss */
 
 .app-header {
-  font-family: "p22-toybox-blocks", sans-serif;
+  font-family: "brother-1816", sans-serif;
+  font-weight:100;
   letter-spacing: 0.2px;
   color: #CFFF36;
   padding: 50px;
@@ -29,9 +30,9 @@
   margin-left: 24px;
   text-decoration: none;
   color: #CFFF36;
-  font-family: "helvetica-lt-pro", sans-serif;
+  font-family: "brother-1816", sans-serif;
   font-size: 1.2em;
-  font-weight: bold;
+  font-weight: light;
   transition: color 0.2s;
 }
 .nav-link:hover {

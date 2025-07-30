@@ -1,4 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.login {
+  font-family: "brother-1816", sans-serif;
+  font-weight: 100;
+  letter-spacing: 0.2px;
+  color: #CFFF36;
+  padding: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
 
 
 

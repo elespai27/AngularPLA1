@@ -1,0 +1,11 @@
+.about {
+  color: #CFFF36;
+  font-family: "brother-1816", sans-serif;
+  font-weight: 100;
+}
+.paragraph-about {
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin: 20px 0;
+  color: #00ffff;
+}

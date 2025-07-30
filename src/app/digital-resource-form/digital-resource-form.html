@@ -5,8 +5,8 @@
   <!-- <input formControlName="title" placeholder="Title" required />
    se cambia el input del formulario sencillo por el de mat-form-field de Angular-->
   <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Título</mat-label>
-    <input matInput formControlName="title" placeholder="Título" required />
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" placeholder="Title" required />
     <mat-error *ngIf="resourceForm.get('title')?.hasError('required')">
       The title is required.
     </mat-error>
@@ -14,8 +14,8 @@
 
   <!-- <input formControlName="author" placeholder="Author" required /> -->
   <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Autor</mat-label>
-    <input matInput formControlName="author" placeholder="Autor" required />
+    <mat-label>Author</mat-label>
+    <input matInput formControlName="author" placeholder="Author" required />
     <mat-error *ngIf="resourceForm.get('author')?.hasError('required')">
       The author is required.
     </mat-error>
@@ -23,8 +23,8 @@
 
   <!-- <input formControlName="year" placeholder="Year" required /> -->
      <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Año</mat-label>
-    <input matInput type="number" formControlName="year" placeholder="Año" required />
+    <mat-label>Year</mat-label>
+    <input matInput type="number" formControlName="year" placeholder="Year" required />
     <mat-error *ngIf="resourceForm.get('year')?.hasError('required')">
       The year is requiered.
     </mat-error>
@@ -36,9 +36,9 @@
   <!-- <input formControlName="type" placeholder="Type (book/video/etc)" required />
   <br /> -->
    <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Tipo</mat-label>
+    <mat-label>Type</mat-label>
     <mat-select formControlName="type" required>
-      <mat-option value="book">Libro</mat-option>
+      <mat-option value="book">Book</mat-option>
       <mat-option value="video">Video</mat-option>
       <mat-option value="audio">Audio</mat-option>
       <!-- Agrega más opciones según sea necesario -->
@@ -99,7 +99,7 @@ cambiamos esta parte del código para probar con una tabla
 el loop viene interno en mat-table y con el atributo [dtaSource]="sources"-->
 
 
-<table mat-table [dataSource]="resources" class="mat-elevation-z8 full-width">
+<table mat-table [dataSource]="resources" class="mat-elevation-z8 full-width mat-table">
 
   <!-- Title Column -->
   <ng-container matColumnDef="title">
@@ -129,10 +129,10 @@ el loop viene interno en mat-table y con el atributo [dtaSource]="sources"-->
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Button </th>
     <td mat-cell *matCellDef="let resource; let i = index">
-      <button mat-icon-button color="primary" (click)="editResource(i)">
+      <button mat-icon-button color="primary" class="edit-btn" (click)="editResource(i)">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" (click)="deleteResource(i)">
+      <button mat-icon-button color="warn" class="delete-btn" (click)="deleteResource(i)">
         <mat-icon>delete</mat-icon>
       </button>
     </td>
