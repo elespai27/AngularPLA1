@@ -1,0 +1,39 @@
+canvas {
+  display: block;
+  max-width: 400px;
+  margin: 20px auto;
+}
+.dashboard {
+  text-align: center;
+  font-family: brother-1816;
+  ;
+}
+.dashboard-summary {
+  font-family: brother-1816;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  color: #535353;
+  background: #222;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-align: center;
+}
+.refresh-button {
+  background-color: #222; /* Green */
+  border: none;
+  color: #535353;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: brother-1816;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer
+
+}

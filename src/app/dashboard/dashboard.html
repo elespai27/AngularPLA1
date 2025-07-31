@@ -1,0 +1,17 @@
+<p class="dashboard">dashboard works!</p>
+
+<div class="dashboard-summary">
+  <mat-card class="summary-card">Total resources: {{ totalResources }}</mat-card>
+  <mat-card class="summary-card">Books: {{ numBooks }}</mat-card>
+  <mat-card class="summary-card">Videos: {{ numVideos }}</mat-card>
+  <mat-card class="summary-card">Audio: {{ numAudio }}</mat-card>
+</div>
+<!-- Aquí tu componente de gráfico, p.ej. con ng2-charts, apexcharts o ngx-charts -->
+<canvas class="canvas"
+  baseChart
+  [data]="pieData"
+  [type]="'pie'">
+</canvas>
+<button mat-raised-button color="primary" class="refresh-button" (click)="emitRefresh()">
+ refresh
+</button>

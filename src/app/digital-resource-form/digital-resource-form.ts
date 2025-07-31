@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
+import { DigitalResourceList } from "../digital-resource-list/digital-resource-list";
 
 @Component({
   selector: 'app-digital-resource-form',
@@ -29,7 +30,8 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     MatSelectModule,
     MatListModule,
-  ],
+    DigitalResourceList
+],
   templateUrl: './digital-resource-form.html',
   styleUrls: ['./digital-resource-form.css'],
 })

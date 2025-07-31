@@ -1,0 +1,40 @@
+table.mat-table {
+  background-color: #ffffff00;  /* Fondo de la tabla */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(44, 29, 219, 0.07);
+  font-size: 1rem;
+}
+::ng-deep .mat-mdc-header-row,
+::ng-deep .mat-mdc-header-row .mat-header-cell {
+  color: #ffb7f9 !important;
+}
+
+::ng-deep .mat-mdc-row .mat-mdc-cell {
+  color: #ffb7f9 !important;
+}
+
+tr.mat-row:hover .mat-cell {
+  background: #555555;
+}
+
+.full-width {
+  width: 100%;
+  min-width: 360px;
+}
+.edit-btn {
+  background-color: #00ffff !important;
+  color: #CFFF36!important;
+  border-radius: 5px !important;
+}
+.edit-btn:hover {
+  background-color: #38ffff73 !important;
+}
+.delete-btn {
+  background-color: #f8b9f3 !important;
+  color: #ff31ee !important;
+  border-radius: 5px !important;
+}
+.delete-btn:hover {
+  background-color: #ffb7f9 !important;
+}
