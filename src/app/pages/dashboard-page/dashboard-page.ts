@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Dashboard } from '../../dashboard/dashboard';
+import { ResourceService } from '../../services/resourceService';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -8,26 +9,35 @@ import { Dashboard } from '../../dashboard/dashboard';
   templateUrl: './dashboard-page.html',
   styleUrls: ['./dashboard-page.css'],
 })
-export class DashboardPage {
-  totalResources: number = 10; // Example data
-  numBooks: number = 5; // Example data
-  numVideos: number = 3; // Example data
-  numAudio: number = 2; // Example data
-  pieLabels: string[] = ['Books', 'Videos', 'Audio']; // Example labels
-  pieData = {
-    labels: this.pieLabels,
-    datasets: [{ data: [this.numBooks, this.numVideos, this.numAudio],
-      backgroundColor: ['#42e9f5ff', '#6249f3ff', '#FFA726'], // Personaliza aquí
-      borderColor: ['#FFA726', '#42e9f5ff', '#42e9f5ff'],     // Opcional
-      borderWidth: 2
-    }],
-  };
+
+export class DashboardPage implements OnInit {
+  pieLabels: string[] = ['Books', 'Videos', 'Audio'];
+  pieData: any = { labels: [], datasets: [] };
+
+  constructor(private resourceService: ResourceService) {}
+
+  ngOnInit() {
+    this.loadPieChartData();
+  }
+
+  loadPieChartData() {
+    const resources = this.resourceService.getResources();
+    const numBooks = resources.filter(r => r.type === 'book').length;
+    const numVideos = resources.filter(r => r.type === 'video').length;
+    const numAudio = resources.filter(r => r.type === 'audio').length;
+
+    this.pieData = {
+      labels: this.pieLabels,
+      datasets: [{
+        data: [numBooks, numVideos, numAudio],
+        backgroundColor: ['#42e9f5ff', '#6249f3ff', '#FFA726'],
+        borderColor: ['#FFA726', '#42e9f5ff', '#42e9f5ff'],
+        borderWidth: 2
+      }]
+    };
+  }
 
   onRefreshRequested() {
-    // Aquí va la lógica para refrescar los datos
-    console.log('¡Refresco solicitado desde Dashboard!');
-  }
-  constructor() {
-    // Initialization logic if needed
+    this.loadPieChartData(); // Esto recalcula el gráfico con los datos actuales
   }
 }

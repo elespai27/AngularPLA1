@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class DigitalResourceList {
   @Input() resources: DigitalResource[] = [];
   @Input() displayedColumns: string[] = [];
+  // Esto son las columnas de recursos
 
   @Output() edit = new EventEmitter<number>();
   @Output() delete = new EventEmitter<number>();

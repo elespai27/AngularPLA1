@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
-import { DigitalResourceList } from "../digital-resource-list/digital-resource-list";
+import { DigitalResourceList } from '../digital-resource-list/digital-resource-list';
 
 @Component({
   selector: 'app-digital-resource-form',
@@ -30,8 +30,8 @@ import { DigitalResourceList } from "../digital-resource-list/digital-resource-l
     MatIconModule,
     MatSelectModule,
     MatListModule,
-    DigitalResourceList
-],
+    DigitalResourceList,
+  ],
   templateUrl: './digital-resource-form.html',
   styleUrls: ['./digital-resource-form.css'],
 })
@@ -64,7 +64,7 @@ export class DigitalResourceForm {
       this.resources = this.resourceService.addResource(
         this.resourceForm.value
       );
-     this.clearAndPristineForm();
+      this.clearAndPristineForm();
     }
   }
 
@@ -74,7 +74,7 @@ export class DigitalResourceForm {
         this.index,
         this.resourceForm.value
       );
-     this.clearAndPristineForm();
+      this.clearAndPristineForm();
       this.index = null;
     }
   }

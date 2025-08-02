@@ -168,5 +168,14 @@ Cada recurso tiene botones para:
 El usuario puede actualizar un recurso editado y guardarlo.
 Todo es persistente gracias al uso de localStorage.
 
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<UPDATE>>>>
 
+Componentes (formulario, lista, dashboard)
+      |
+      v
+  ResourceService (la lista vive aquí)
+      |
+      v
+ LocalStorage (persistencia)
 
+¡Nadie accede a localStorage solo! Solo el servicio lo hace y los demás le piden los datos.
